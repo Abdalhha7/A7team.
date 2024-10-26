@@ -1,0 +1,305 @@
+ <!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A7 - تعريف</title>
+    <!-- استدعاء خط Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* إعدادات أساسية */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: radial-gradient(circle, #440000, #220000);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            animation: gradientBackground 10s infinite alternate;
+        }
+
+        /* حركة الخلفية */
+        @keyframes gradientBackground {
+            0% { background: radial-gradient(circle, #440000, #220000); }
+            100% { background: radial-gradient(circle, #220000, #440000); }
+        }
+
+        /* تصميم الشعار */
+        .logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 5px solid #ff4500;
+            margin-top: 20px;
+            animation: spin 8s linear infinite;
+        }
+
+        /* حركة دوران الشعار */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* تصميم البطاقة */
+        .card {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(15px);
+            text-align: center;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            animation: fadeIn 1.5s ease;
+        }
+
+        /* تأثير عند تمرير الماوس على البطاقة */
+        .card:hover {
+            transform: scale(1.08);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+        }
+
+        .card h1 {
+            font-size: 2rem;
+            margin: 20px 0 10px;
+            color: #ff4500;
+        }
+
+        .card p {
+            font-size: 1.1rem;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .social-icons a {
+            color: #ff4500;
+            font-size: 2rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            color: #ff0000;
+            transform: scale(1.3);
+        }
+
+        .follow-btn {
+            background: #ff4500;
+            color: #111;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 69, 0, 0.6);
+        }
+
+        .follow-btn:hover {
+            background: #ff0000;
+            transform: scale(1.1);
+        }
+
+        .more-info {
+            margin-top: 25px;
+            font-size: 1rem;
+            color: #ff4500;
+            cursor: pointer;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .more-info:hover {
+            color: #ff0000;
+            transform: scale(1.15);
+        }
+
+        .arrow-down {
+            font-size: 2.5rem;
+            color: #ff4500;
+            margin-top: 5px;
+            animation: bounce 1.5s infinite;
+        }
+
+        /* قسم معلومات الفريق */
+        .team-info {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
+            max-width: 800px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .team-info h2 {
+            font-size: 2.5rem;
+            color: #ff4500;
+            margin-bottom: 20px;
+        }
+
+        .team-info p {
+            font-size: 1.1rem;
+            color: #ddd;
+            line-height: 1.8;
+        }
+
+        /* صفحة المتابعة */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            color: #ff4500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 1000;
+            animation: fadeIn 1s forwards;
+        }
+
+        .overlay a {
+            background: #ff4500;
+            color: #111;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1.3rem;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: background 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 69, 0, 0.4);
+        }
+
+        .overlay a:hover {
+            background: #ff0000;
+        }
+
+        .overlay p {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2.5rem;
+            color: #ff4500;
+            cursor: pointer;
+        }
+
+        /* حقوق المطور */
+        .footer {
+            position: fixed;
+            bottom: 10px;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* حركات */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(15px);
+            }
+        }
+
+        /* تظهر معلومات الفريق عند الضغط */
+        .show-info {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- الشعار -->
+    <img src="https://i.ibb.co/1913TKZ/F6-C7-A34-E-6-ADF-409-A-9-DCB-EB077896589-E.png" alt="A7 Logo" class="logo">
+
+    <!-- بطاقة الفريق -->
+    <div class="card">
+        <h1>A7team</h1>
+        <p>مجموعة من المصممين المحترفين لسيرفر "Respect"</p>
+        
+        <div class="social-icons">
+            <a href="https://x.com/TeamA7op?t=a9xxVo8BX-ndQzSPgHnhUw&s=09" target="_blank">&#xf099; تويتر</a>
+            <a href="https://discord.gg/a7tm" target="_blank">&#xf16d; ديسكورد</a>
+        </div>
+        
+        <button class="follow-btn" onclick="showFollowPage()">متابعة</button>
+        
+        <div class="more-info" onclick="showTeamInfo()">
+            تعرف على المزيد
+            <span class="arrow-down">&#8595;</span>
+        </div>
+    </div>
+
+    <!-- معلومات الفريق -->
+    <div class="team-info" id="teamInfo">
+        <h2>من نحن</h2>
+        <p>تيم A7 هو مجموعة من المصممين المحترفين في مجال التصميم والإبداع، يسعون لإثراء عالم التصميم بأفكار فريدة ومبتكرة.</p>
+    </div>
+
+    <!-- صفحة المتابعة -->
+    <div class="overlay" id="followPage"><span class="close-btn" onclick="hideFollowPage()">×</span>
+        <p>انضم إلى سيرفر الديسكورد الخاص بــ تيم A7:</p>
+        <a href="https://discord.gg/a7tm" target="_blank">رابط الديسكورد</a>
+    </div>
+
+    <!-- حقوق المطور -->
+    <div class="footer">
+        <p>© 2024 تصميم وتطوير بواسطة MK7</p>
+    </div>
+
+    <script>
+        // دالة إظهار معلومات الفريق
+        function showTeamInfo() {
+            document.getElementById('teamInfo').classList.toggle('show-info');
+        }
+
+        // دالة إظهار صفحة المتابعة
+        function showFollowPage() {
+            document.getElementById('followPage').style.display = 'flex';
+        }
+
+        // دالة إغلاق صفحة المتابعة
+        function hideFollowPage() {
+            document.getElementById('followPage').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
